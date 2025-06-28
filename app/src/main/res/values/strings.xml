@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">🌦️ Weather App</string>
+    <string name="show_weather">Показать погоду</string>
+    <string name="weather_title">Погода</string>
+    <string name="temperature">Температура: %1$s°C</string>
+    <string name="humidity">Влажность: %1$s%%</string>
+    <string name="wind_speed">Скорость ветра: %1$s м/с</string>
+    <string name="select_date">Выбрать дату</string>
+    <string name="show_weather_for_date">Обновить</string>
+    <string name="about_region">О регионе</string>
+    <string name="back">Назад</string>
+</resources>

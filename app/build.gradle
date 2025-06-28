@@ -1,0 +1,84 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+ext {
+    mapkitApiKey = getMapkitApiKey()
+}
+
+private String getMapkitApiKey() {
+    def properties = new Properties()
+    try {
+        project.file("local.properties").withInputStream { properties.load(it) }
+        return properties.getProperty("MAPKIT_API_KEY", "")
+    } catch (Exception e) {
+        println("Error loading MAPKIT_API_KEY: " + e.message)
+        return ""
+    }
+}
+
+android {
+    namespace 'com.example.myapplication'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.myapplication"
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "MAPKIT_API_KEY", "\"${mapkitApiKey}\""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    
+    // Yandex Maps - updated to latest version
+    implementation 'com.yandex.android:maps.mobile:4.6.1-lite'
+    
+    // Location
+    implementation 'com.google.android.gms:play-services-location:21.1.0'
+    
+    // Networking
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    
+    // OpenStreetMap data parsing
+    implementation 'org.osmdroid:osmdroid-android:6.1.17'
+    implementation 'org.osmdroid:osmdroid-mapsforge:6.1.17'
+    
+    // UI Components
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // WebView
+    implementation 'androidx.webkit:webkit:1.8.0'
+    
+    // Testing
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
