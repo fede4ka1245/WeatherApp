@@ -4,7 +4,9 @@
 текущую погоду для заданных координат
 
 ## Демо
-
+<p align="center">
+  <img src="https://github.com/fede4ka1245/WeatherApp/blob/main/assets/demo.gif?raw=true" height="520px" width="250px" />
+</p>
 
 ## Особенности: 
 - Полностью написан на Java
